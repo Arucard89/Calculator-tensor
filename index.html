@@ -4,32 +4,58 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/main.css">
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <title>Длинная арифметика</title>
 </head>
 <body>
     <div class="container">
-        <form name="calculatorForm">
+        <form name="calculatorForm" class="col-sm-8">
             <h3>Длинная арифметика</h3>
             <div class="row">
                 <div class="form-group">
-                    <label for="firstNumber" class="col-sm-2 control-label">Первое число</label>
-                    <div class="col-sm-6">
-                        <input class="form-control" id="firstNumber" type="text" placeholder="Не более 64 символов">
+                    <label for="firstNumber" class="col-sm-3 control-label">Первое число</label>
+                    <div class="col-sm-9">
+                        <input class="form-control input-sm" id="firstNumber" type="text" size="64" placeholder="Не более 64 символов">
                     </div>
                 </div>
             </div>
+
             <div class="row">
                 <div class="form-group">
-                    <label for="secondNumber" class="col-sm-2 control-label">Второе число</label>
-                    <div class="col-sm-6">
-                        <input class="form-control" name="secondNumber" id="secondNumber" type="text" placeholder="Не более 64 символов">
+                    <label for="operationSign" class="col-sm-3 control-label">Операция</label>
+                    <div class="col-sm-1">
+                        <select class="form-control input-sm" id="operationSign">
+                            <option>-</option>
+                            <option>*</option>
+                        </select>
                     </div>
                 </div>
-
             </div>
 
+
+            <div class="row">
+                <div class="form-group">
+                    <label for="secondNumber" class="col-sm-3 control-label">Второе число</label>
+                    <div class="col-sm-9">
+                        <input class="form-control input-sm" name="secondNumber" id="secondNumber" type="text" placeholder="Не более 64 символов">
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-12" id="equalSign">=</div>
+            </div>
+
+            <div class="row">
+                <div class="form-group">
+                    <label for="result" class="col-sm-3 control-label">Первое число</label>
+                    <div class="col-sm-9">
+                        <input class="form-control input-sm" id="result" type="text" placeholder="Ответ">
+                    </div>
+                </div>
+            </div>
         </form>
     </div>
     <src src="js/main.js"></src>
