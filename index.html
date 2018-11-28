@@ -17,7 +17,7 @@
                 <div class="form-group">
                     <label for="firstNumber" class="col-sm-3 control-label">Первое число</label>
                     <div class="col-sm-8">
-                        <input class="form-control input-sm" id="firstNumber" type="text" size="64" placeholder="Не более 64 символов">
+                        <input class="form-control input-sm" id="firstNumber" type="text" size="64" placeholder='Знаки "+", "-" и цифры. Не более 64 символов'>
                     </div>
                 </div>
             </div>
@@ -27,19 +27,18 @@
                     <label for="operationSign" class="col-sm-3 control-label">Операция</label>
                     <div class="col-sm-1" id="operationSignDiv">
                         <select class="form-control input-sm" id="operationSign">
-                            <option value="-">-</option>
+                            <option selected value="-">-</option>
                             <option value="*">*</option>
                         </select>
                     </div>
                 </div>
             </div>
 
-
             <div class="row">
                 <div class="form-group">
                     <label for="secondNumber" class="col-sm-3 control-label">Второе число</label>
                     <div class="col-sm-8">
-                        <input class="form-control input-sm" name="secondNumber" id="secondNumber" type="text" placeholder="Не более 64 символов">
+                        <input class="form-control input-sm" name="secondNumber" id="secondNumber" type="text" placeholder='Знаки "+", "-" и цифры. Не более 64 символов'>
                     </div>
                 </div>
             </div>
@@ -52,7 +51,7 @@
                 <div class="form-group">
                     <label for="result" class="col-sm-3 control-label">Первое число</label>
                     <div class="col-sm-8">
-                        <input class="form-control input-sm" id="result" type="text" placeholder="Ответ">
+                        <input class="form-control input-sm" id="result" type="text" readonly="readonly" placeholder="Ответ">
                     </div>
                 </div>
             </div>

@@ -12,6 +12,18 @@ btn.onclick = (e) => {
     goodInput = goodInput && checkInput(secondElem);
 
     if (goodInput) {
+        let operation = document.getElementById('operationSign');
+        let bigNum = new BigNumberOperations(firstVal, secondVal);
+        let res = document.getElementById('result');
+        switch (operation.value){
+            case '-':
+                res.value = bigNum.sub();
+                break;
+            case '*':
+                setTimeout(() => {
+                    res.value = bigNum.multiply();
+                }, 0);
+        }
 
     }
 
