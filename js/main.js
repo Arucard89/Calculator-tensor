@@ -12,7 +12,7 @@ btn.onclick = (e) => {
     goodInput = goodInput && checkInput(secondElem);
 
     if (goodInput) {
-            
+
     }
 
 };
