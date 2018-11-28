@@ -149,23 +149,31 @@ class BigNumberOperations {
             //переполнение
             let overflow = 0;
             let _res = '';//промежуточные результаты
+            for (let k = b.length - 1 - i; k > 0; k--){
+                _res = _res + '0';
+            }
             //добавить заполенние нулями в конце
             for (let j = a.length - 1; j >= 0; j--) {
                 overflow = (overflow + +a[j]) * b[i];
                 //_res.push(overflow % 10);
-                res = overflow % 10 + res;
+                _res = overflow % 10 + _res;
                 overflow = ~~(overflow/10);
             }
-            res = this._bigAdd(res, _res.reverse(),join(''))
-
+            res = this._bigAdd(res, _res);
         }
+        //определяем знак выражения
+        if (signa + signb == 1) {
+            res = '-' + res;
+        }
+        return res;
     }
 
 }
 
 let bn = new BigNumberOperations();
 //let subtract = bn.bigSub;
-test(bn.bigSub("", "-111111111111111111111"), "-2774536605897852597985261403");
+console.log(bn.multiply('123','-21'));
+//test(bn.bigSub("", "-111111111111111111111"), "-2774536605897852597985261403");
 function test (a, b){
     console.log(a === b);
 }
