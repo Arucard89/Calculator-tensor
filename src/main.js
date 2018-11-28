@@ -149,16 +149,17 @@ class BigNumberOperations {
             //переполнение
             let overflow = 0;
             let _res = '';//промежуточные результаты
+            //заполняем строки после первой нулями
             for (let k = b.length - 1 - i; k > 0; k--){
                 _res = _res + '0';
             }
-            //добавить заполенние нулями в конце
+            //умножаем в столбик
             for (let j = a.length - 1; j >= 0; j--) {
                 overflow = (overflow + +a[j]) * b[i];
-                //_res.push(overflow % 10);
                 _res = overflow % 10 + _res;
                 overflow = ~~(overflow/10);
             }
+            _res = overflow + _res;
             res = this._bigAdd(res, _res);
         }
         //определяем знак выражения
@@ -172,7 +173,8 @@ class BigNumberOperations {
 
 let bn = new BigNumberOperations();
 //let subtract = bn.bigSub;
-console.log(bn.multiply('123','-21'));
+console.log(bn.multiply('25478','2365478'));
+console.log(25478 * 2365478);
 //test(bn.bigSub("", "-111111111111111111111"), "-2774536605897852597985261403");
 function test (a, b){
     console.log(a === b);
