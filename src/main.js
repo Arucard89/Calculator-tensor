@@ -7,6 +7,36 @@ class BigNumberOperations {
     }
 
     /**
+     * преобразование ввода в нужный для вычислений формат
+     * @param first
+     * @param second
+     * @returns {*}
+     * @private
+     */
+    _refactorInput(first, second) {
+        //проверяем ввод
+        if (!this._checkNumber(first)) {
+            alert('Первое число введено неверно');
+            return [];
+        }
+        if (!this._checkNumber(second)) {
+            alert('Второе число введено неверно');
+            return [];
+        }
+        //если соответствует ТЗ, то продолжаем
+        //превращаем в строку
+        let a = first + '';
+        let b = second + '';
+        //определяем знак
+        let signa = a[0] === '-';
+        let signb = b[0] === '-';
+        //убираем символ знака, т.к. мы его уже учли
+        a = a.replace(/^(-|\+)/,'');
+        b = b.replace(/^(-|\+)/,'');
+        return [a, b, signa, signb];
+    }
+
+    /**
      * проверяет строку на соответствие условиям ТЗ
      * @param s
      * @returns {boolean}
@@ -25,10 +55,10 @@ class BigNumberOperations {
      * @returns {number}
      * @private
      */
-    _compare(first = this.a, second = this.b) {
+    _compare(first, second) {
         //убираем незначащие нули
-        let a = first.replace(/^0+/,'');
-        let b = second.replace(/^0+/,'');
+        let a = String(first).replace(/^0+/,'');
+        let b = String(second).replace(/^0+/,'');
         //определяем наибольший операнд
         if (a.length>b.length) return 1;
         if (a.length<b.length) return -1;
@@ -46,7 +76,7 @@ class BigNumberOperations {
      * @returns {*}
      * @private
      */
-    _bigAdd(first = this.a, second = this.b) {
+    _add(first = this.a, second = this.b) {
         //превращаем в строку
         let a = first + '';
         let b = second + '';
@@ -56,15 +86,15 @@ class BigNumberOperations {
         //убираем символ знака, т.к. мы его уже учли
         a = a.replace(/^(-|\+)/,'');
         b = b.replace(/^(-|\+)/,'');
-        //определяем действие, которое нуждно выполнить, в зависимости от знака операндов
+        //определяем действие, которое нужно выполнить, в зависимости от знака операндов
         if(signa && signb) {
-            return '-' + this._bigAdd(a, b);
+            return '-' + this._add(a, b);
         }
         if(signa && !signb) {
-            return this.bigSub(b, a);
+            return this.sub(b, a);
         }
         if(!signa && signb) {
-            return this.bigSub(a, b);
+            return this.sub(a, b);
         }
         //считаем сумму столбиком
         let res = '';
@@ -85,7 +115,7 @@ class BigNumberOperations {
      * @param second
      * @returns {*}
      */
-    bigSub(first = this.a, second = this.b) {
+    sub(first = this.a, second = this.b) {
         //превращаем в строку
         let a = first + '';
         let b = second + '';
@@ -98,7 +128,7 @@ class BigNumberOperations {
         //если первый операнд отрицательный, а второй положительный, то считаем сумму и добавляем ей "-"
         //если первый положительный, а второй отрицательный, то возвращаем сумму
         if (signa + signb == 1) {
-            return (signa ? '-' : '') + this._bigAdd(a,b);
+            return (signa ? '-' : '') + this._add(a,b);
         }
         //определяем порядок операндов
         if (this._compare(a, b) == -1) {
@@ -125,6 +155,12 @@ class BigNumberOperations {
         return a || '0';
     }
 
+    /**
+     * умножение больших чисел
+     * @param first
+     * @param second
+     * @returns {string}
+     */
     multiply(first = this.a, second = this.b){
         //превращаем в строку
         let a = first + '';
@@ -144,7 +180,7 @@ class BigNumberOperations {
         b = [...b];
         //итоговый массив
         let res = '0';
-
+        //умножаем в столбик
         for(let i = b.length - 1; i >= 0; i--) {
             //переполнение
             let overflow = 0;
@@ -153,14 +189,14 @@ class BigNumberOperations {
             for (let k = b.length - 1 - i; k > 0; k--){
                 _res = _res + '0';
             }
-            //умножаем в столбик
+
             for (let j = a.length - 1; j >= 0; j--) {
-                overflow = (overflow + +a[j]) * b[i];
+                overflow = overflow + (a[j] * b[i]);
                 _res = overflow % 10 + _res;
                 overflow = ~~(overflow/10);
             }
             _res = overflow + _res;
-            res = this._bigAdd(res, _res);
+            res = this._add(res, _res);
         }
         //определяем знак выражения
         if (signa + signb == 1) {
@@ -172,10 +208,18 @@ class BigNumberOperations {
 }
 
 let bn = new BigNumberOperations();
-//let subtract = bn.bigSub;
-console.log(bn.multiply('25478','2365478'));
-console.log(25478 * 2365478);
-//test(bn.bigSub("", "-111111111111111111111"), "-2774536605897852597985261403");
+//let subtract = bn.sub;
+let a='-999999999999999999999999999999999999999999999999999999999999', b= '-999999999999999999999999999999999999999999999999999999999999';
+console.log(bn.multiply(a,b));
+console.log(a * b);
+//test(bn.sub("", "-111111111111111111111"), "-2774536605897852597985261403");
+
+
+test(bn._add(1, "123456789012345678901234567890"), "123456789012345678901234567891");
+test(bn.sub("123456789012345678901234567890", 1), "123456789012345678901234567889");
+
+test(bn._add(-1, "123456789012345678901234567890"), "123456789012345678901234567889");
+test(bn.sub("123456789012345678901234567890", -1), "123456789012345678901234567891");
 function test (a, b){
     console.log(a === b);
 }
