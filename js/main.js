@@ -1,16 +1,22 @@
 let btn = document.getElementById('OKButton');
+
+/**
+ * обработчик нажатия кнопки
+ * @param e
+ */
 btn.onclick = (e) => {
     e.preventDefault();
-
+    //получаем значения ввода
     let firstElem = document.getElementById('firstNumber');
     let secondElem = document.getElementById('secondNumber');
     let firstVal = firstElem.value;
     let secondVal = secondElem.value;
+    //флаг правильного ввода
     let goodInput = true;
-
-    goodInput = goodInput && checkInput(firstElem);
-    goodInput = goodInput && checkInput(secondElem);
-
+    //проверяем ввод
+    goodInput = checkInput(firstElem) && goodInput;
+    goodInput = checkInput(secondElem) && goodInput;
+    //если все хорошо, то выполняем выбранную операцию
     if (goodInput) {
         let operation = document.getElementById('operationSign');
         let bigNum = new BigNumberOperations(firstVal, secondVal);
@@ -20,15 +26,19 @@ btn.onclick = (e) => {
                 res.value = bigNum.sub();
                 break;
             case '*':
+                //асинхронно, чтобы не задерживало окно
                 setTimeout(() => {
                     res.value = bigNum.multiply();
                 }, 0);
+                break;
+            default:
+                alert("Возникла непредвиденная ошибка. Перезагрузите, пожалуйста страницу.")
         }
-
+    } else {
+        alert("Неверно заполнены выделенные красным поля. Исправьте, пожалуйста, ошибку и попробуйте снова.");
     }
 
 };
-
 
 /**
  * проверка ввода на соответствие ТЗ
@@ -59,4 +69,3 @@ function checkNumber(s){
     let regExp = /^((\+|-)?)(\d+)$/g;
     return (s.length <= 64) && (regExp.test(s));
 }
-
