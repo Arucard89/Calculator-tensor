@@ -8,38 +8,31 @@ btn.onclick = (e) => {
     let secondVal = secondElem.value;
     let goodInput = true;
 
-    if (!checkNumber(firstVal)) {
-        firstElem.classList.add('wrongInput');
-        goodInput = false;
-    } else {
-        firstElem.classList.remove('wrongInput');
+    goodInput = goodInput && checkInput(firstElem);
+    goodInput = goodInput && checkInput(secondElem);
+
+    if (goodInput) {
+            
     }
-
-
-    firstElem.classList.remove('wrongInput');
-    secondElem.classList.remove('wrongInput');
-
-
 
 };
 
 
-
-
 /**
  * проверка ввода на соответствие ТЗ
- * @param first
- * @param second
- * @returns {number}
+ * @param elem
+ * @returns {boolean}
  */
-function checkComplianceToTask(first, second){
-    if (!checkNumber(first)) {
-        return 1;
+function checkInput(elem){
+    let goodInput = true;
+    if (!checkNumber(elem.value)) {
+        elem.classList.add('wrongInput');
+        goodInput = false;
+    } else {
+        elem.classList.remove('wrongInput');
     }
-    if (!checkNumber(second)) {
-        return 2;
-    }
-    return 0;
+
+    return goodInput;
 }
 
 /**
