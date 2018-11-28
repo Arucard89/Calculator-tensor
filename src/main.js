@@ -14,16 +14,6 @@ class BigNumberOperations {
      * @private
      */
     _refactorInput(first, second) {
-        //проверяем ввод
-        if (!this._checkNumber(first)) {
-            alert('Первое число введено неверно');
-            return [];
-        }
-        if (!this._checkNumber(second)) {
-            alert('Второе число введено неверно');
-            return [];
-        }
-        //если соответствует ТЗ, то продолжаем
         //превращаем в строку
         let a = first + '';
         let b = second + '';
@@ -34,18 +24,6 @@ class BigNumberOperations {
         a = a.replace(/^(-|\+)/,'');
         b = b.replace(/^(-|\+)/,'');
         return [a, b, signa, signb];
-    }
-
-    /**
-     * проверяет строку на соответствие условиям ТЗ
-     * @param s
-     * @returns {boolean}
-     * @private
-     */
-    _checkNumber(s){
-        //регулярное выражение: первый символ может быть "+" или "-", остальные только цифры
-        let regExp = /^((\+|-)?)(\d+)$/g;
-        return (s.length <= 64) && (regExp.test(s));
     }
 
     /**
@@ -77,15 +55,12 @@ class BigNumberOperations {
      * @private
      */
     _add(first = this.a, second = this.b) {
-        //превращаем в строку
-        let a = first + '';
-        let b = second + '';
-        //определяем знак
-        let signa = a[0] === '-';
-        let signb = b[0] === '-';
-        //убираем символ знака, т.к. мы его уже учли
-        a = a.replace(/^(-|\+)/,'');
-        b = b.replace(/^(-|\+)/,'');
+        //проверяем ввод
+        let inputArr = this._refactorInput(first, second);
+        if (inputArr.length === 0) {
+            return;
+        }
+        let [a, b, signa, signb] = inputArr;
         //определяем действие, которое нужно выполнить, в зависимости от знака операндов
         if(signa && signb) {
             return '-' + this._add(a, b);
@@ -116,15 +91,12 @@ class BigNumberOperations {
      * @returns {*}
      */
     sub(first = this.a, second = this.b) {
-        //превращаем в строку
-        let a = first + '';
-        let b = second + '';
-        //определяем знак
-        let signa = a[0] === '-';
-        let signb = b[0] === '-';
-        //убираем символ знака, т.к. мы его уже учли
-        a = a.replace(/^(-|\+)/,'');
-        b = b.replace(/^(-|\+)/,'');
+        //проверяем ввод
+        let inputArr = this._refactorInput(first, second);
+        if (inputArr.length === 0) {
+            return;
+        }
+        let [a, b, signa, signb] = inputArr;
         //если первый операнд отрицательный, а второй положительный, то считаем сумму и добавляем ей "-"
         //если первый положительный, а второй отрицательный, то возвращаем сумму
         if (signa + signb == 1) {
@@ -162,15 +134,12 @@ class BigNumberOperations {
      * @returns {string}
      */
     multiply(first = this.a, second = this.b){
-        //превращаем в строку
-        let a = first + '';
-        let b = second + '';
-        //определяем знак
-        let signa = a[0] === '-';
-        let signb = b[0] === '-';
-        //убираем символ знака, т.к. мы его уже учли
-        a = a.replace(/^(-|\+)/,'');
-        b = b.replace(/^(-|\+)/,'');
+        //проверяем ввод
+        let inputArr = this._refactorInput(first, second);
+        if (inputArr.length === 0) {
+            return;
+        }
+        let [a, b, signa, signb] = inputArr;
         //определяем порядок операндов
         if (this._compare(a, b) == -1) {
             [a, b] = [b, a];
@@ -189,7 +158,7 @@ class BigNumberOperations {
             for (let k = b.length - 1 - i; k > 0; k--){
                 _res = _res + '0';
             }
-
+            //посимвольно умножаем
             for (let j = a.length - 1; j >= 0; j--) {
                 overflow = overflow + (a[j] * b[i]);
                 _res = overflow % 10 + _res;
@@ -207,19 +176,52 @@ class BigNumberOperations {
 
 }
 
-let bn = new BigNumberOperations();
-//let subtract = bn.sub;
-let a='-999999999999999999999999999999999999999999999999999999999999', b= '-999999999999999999999999999999999999999999999999999999999999';
-console.log(bn.multiply(a,b));
-console.log(a * b);
-//test(bn.sub("", "-111111111111111111111"), "-2774536605897852597985261403");
 
-
-test(bn._add(1, "123456789012345678901234567890"), "123456789012345678901234567891");
-test(bn.sub("123456789012345678901234567890", 1), "123456789012345678901234567889");
-
-test(bn._add(-1, "123456789012345678901234567890"), "123456789012345678901234567889");
-test(bn.sub("123456789012345678901234567890", -1), "123456789012345678901234567891");
-function test (a, b){
-    console.log(a === b);
+/**
+ * проверить ввода на соответствие ТЗ
+ * @param first
+ * @param second
+ * @returns {boolean}
+ */
+function checkComplianceToTask(first, second){
+    if (!checkNumber(first)) {
+        //alert('Первое число введено неверно');
+        return false;
+    }
+    if (!checkNumber(second)) {
+        //alert('Второе число введено неверно');
+        return false;
+    }
+    return true;
 }
+
+/**
+ * проверяет строку на соответствие условиям ТЗ
+ * @param s
+ * @returns {boolean}
+ * @private
+ */
+function checkNumber(s){
+    s = s + '';
+    //регулярное выражение: первый символ может быть "+" или "-", остальные только цифры
+    let regExp = /^((\+|-)?)(\d+)$/g;
+    return (s.length <= 64) && (regExp.test(s));
+}
+
+
+// let bn = new BigNumberOperations();
+// //let subtract = bn.sub;
+// let a='-999999999999999999999999999999999999999999999999999999999999', b= '-999999999999999999999999999999999999999999999999999999999999';
+// console.log(bn.multiply(a,b));
+// console.log(a * b);
+// //test(bn.sub("", "-111111111111111111111"), "-2774536605897852597985261403");
+//
+//
+// test(bn._add(1, "123456789012345678901234567890"), "123456789012345678901234567891");
+// test(bn.sub("123456789012345678901234567890", 1), "123456789012345678901234567889");
+//
+// test(bn._add(-1, "123456789012345678901234567890"), "123456789012345678901234567889");
+// test(bn.sub("123456789012345678901234567890", -1), "123456789012345678901234567891");
+// function test (a, b){
+//     console.log(a === b);
+// }
