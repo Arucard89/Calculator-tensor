@@ -176,7 +176,6 @@ class BigNumberOperations {
 
 }
 
-
 /**
  * проверить ввода на соответствие ТЗ
  * @param first

@@ -1,6 +1,7 @@
 label {
     text-align: right;
 }
+
 #equalSign {
     text-align: right;
     margin-bottom: -5px;
@@ -10,4 +11,21 @@ label {
 .row {
     margin-bottom: 10px;
     margin-top: 10px;
+}
+
+#operationSignDiv {
+     width: 80px;
+}
+
+#calculatorForm {
+    margin-top: 15px;
+    outline: 1px solid lightgray;
+}
+
+#formHeader {
+    padding-left: 65px;
+}
+
+button {
+    text-align: right;
 }
