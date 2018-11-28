@@ -125,6 +125,42 @@ class BigNumberOperations {
         return a || '0';
     }
 
+    multiply(first = this.a, second = this.b){
+        //превращаем в строку
+        let a = first + '';
+        let b = second + '';
+        //определяем знак
+        let signa = a[0] === '-';
+        let signb = b[0] === '-';
+        //убираем символ знака, т.к. мы его уже учли
+        a = a.replace(/^(-|\+)/,'');
+        b = b.replace(/^(-|\+)/,'');
+        //определяем порядок операндов
+        if (this._compare(a, b) == -1) {
+            [a, b] = [b, a];
+        }
+        //строка -> массив
+        a = [...a];
+        b = [...b];
+        //итоговый массив
+        let res = '0';
+
+        for(let i = b.length - 1; i >= 0; i--) {
+            //переполнение
+            let overflow = 0;
+            let _res = '';//промежуточные результаты
+            //добавить заполенние нулями в конце
+            for (let j = a.length - 1; j >= 0; j--) {
+                overflow = (overflow + +a[j]) * b[i];
+                //_res.push(overflow % 10);
+                res = overflow % 10 + res;
+                overflow = ~~(overflow/10);
+            }
+            res = this._bigAdd(res, _res.reverse(),join(''))
+
+        }
+    }
+
 }
 
 let bn = new BigNumberOperations();
