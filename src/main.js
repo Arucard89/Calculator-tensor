@@ -53,8 +53,10 @@ class BigNumberOperations {
         //определяем знак
         let signa = a[0] === '-';
         let signb = b[0] === '-';
-        a = a.replace(/^-/,'');
-        b = b.replace(/^-/,'');
+        //убираем символ знака, т.к. мы его уже учли
+        a = a.replace(/^(-|\+)/,'');
+        b = b.replace(/^(-|\+)/,'');
+        //определяем действие, которое нуждно выполнить, в зависимости от знака операндов
         if(signa && signb) {
             return '-' + this._bigAdd(a, b);
         }
@@ -64,6 +66,7 @@ class BigNumberOperations {
         if(!signa && signb) {
             return this.bigSub(a, b);
         }
+        //считаем сумму столбиком
         let res = '';
         let c = 0;
         a = [...a];
@@ -76,30 +79,46 @@ class BigNumberOperations {
         return res.replace(/^0+/, '') || '0';
     }
 
+    /**
+     * вычитание больших чисел
+     * @param first
+     * @param second
+     * @returns {*}
+     */
     bigSub(first = this.a, second = this.b) {
+        //превращаем в строку
         let a = first + '';
         let b = second + '';
+        //определяем знак
         let signa = a[0] === '-';
         let signb = b[0] === '-';
-        a = a.replace(/^-/,'').replace(/^0+/,'');
-        b = b.replace(/^-/,'').replace(/^0+/,'');
+        //убираем символ знака, т.к. мы его уже учли
+        a = a.replace(/^(-|\+)/,'');
+        b = b.replace(/^(-|\+)/,'');
+        //если первый операнд отрицательный, а второй положительный, то считаем сумму и добавляем ей "-"
+        //если первый положительный, а второй отрицательный, то возвращаем сумму
         if (signa + signb == 1) {
             return (signa ? '-' : '') + this._bigAdd(a,b);
         }
+        //определяем порядок операндов
         if (this._compare(a, b) == -1) {
             [a, b] = [b, a];
         }
+        //строка -> массив
         a = [...a];
         b = [...b];
+        //вычитаем столбиком
         for (let i = a.length - 1; i >= 0; i--) {
             let c = b[b.length - a.length + i] || 0;
-            a[i]=a[i]-c;
+            a[i] = a[i] - c;
             if (a[i] < 0) {
                 a[i] += 10;
                 a[i - 1]--;
             }
         }
+        //превращаем в строку
         a = a.join('').replace(/^0+/,'');
+        //определяем знак результата
         if ((signa && this._compare(first, second) == 1) || (!signa && this._compare(first, second) == -1)) {
             a = '-' + a;
         }
@@ -110,8 +129,7 @@ class BigNumberOperations {
 
 let bn = new BigNumberOperations();
 //let subtract = bn.bigSub;
-test(bn.bigSub("", ""), "0");
-
+test(bn.bigSub("", "-111111111111111111111"), "-2774536605897852597985261403");
 function test (a, b){
     console.log(a === b);
 }
