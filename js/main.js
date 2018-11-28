@@ -18,6 +18,7 @@ btn.onclick = (e) => {
     goodInput = checkInput(secondElem) && goodInput;
     //если все хорошо, то выполняем выбранную операцию
     if (goodInput) {
+        //подготавливаем переменные для выполнения операций
         let operation = document.getElementById('operationSign');
         let bigNum = new BigNumberOperations(firstVal, secondVal);
         let res = document.getElementById('result');
