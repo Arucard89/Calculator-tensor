@@ -6,18 +6,19 @@ btn.onclick = (e) => {
     let secondElem = document.getElementById('secondNumber');
     let firstVal = firstElem.value;
     let secondVal = secondElem.value;
+    let goodInput = true;
+
+    if (!checkNumber(firstVal)) {
+        firstElem.classList.add('wrongInput');
+        goodInput = false;
+    } else {
+        firstElem.classList.remove('wrongInput');
+    }
+
+
     firstElem.classList.remove('wrongInput');
     secondElem.classList.remove('wrongInput');
-    switch (checkComplianceToTask(firstVal, secondVal)) {
-        case 1:
-            firstElem.classList.add('wrongInput');
-            break;
-        case 2:
-            secondElem.classList.add('wrongInput');
-            break;
-        default:
 
-    }
 
 
 };
