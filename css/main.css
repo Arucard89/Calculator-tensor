@@ -25,3 +25,7 @@ label {
 #formHeader {
     padding-left: 65px;
 }
+
+.wrongInput{
+    background-color: lightcoral;
+}

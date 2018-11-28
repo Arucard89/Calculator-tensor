@@ -1,5 +1,32 @@
+let btn = document.getElementById('OKButton');
+btn.onclick = (e) => {
+    e.preventDefault();
+
+    let firstElem = document.getElementById('firstNumber');
+    let secondElem = document.getElementById('secondNumber');
+    let firstVal = firstElem.value;
+    let secondVal = secondElem.value;
+    firstElem.classList.remove('wrongInput');
+    secondElem.classList.remove('wrongInput');
+    switch (checkComplianceToTask(firstVal, secondVal)) {
+        case 1:
+            firstElem.classList.add('wrongInput');
+            break;
+        case 2:
+            secondElem.classList.add('wrongInput');
+            break;
+        default:
+
+    }
+
+
+};
+
+
+
+
 /**
- * проверить ввода на соответствие ТЗ
+ * проверка ввода на соответствие ТЗ
  * @param first
  * @param second
  * @returns {number}
@@ -26,3 +53,4 @@ function checkNumber(s){
     let regExp = /^((\+|-)?)(\d+)$/g;
     return (s.length <= 64) && (regExp.test(s));
 }
+
