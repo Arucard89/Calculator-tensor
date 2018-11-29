@@ -1,104 +1,108 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/main.css">
-    <script src="js/jquery.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <title>Длинная арифметика</title>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+   <link rel="stylesheet" href="css/bootstrap.min.css">
+   <link rel="stylesheet" href="css/main.css">
+   <script src="js/jquery.min.js"></script>
+   <script src="js/bootstrap.min.js"></script>
+   <title>Длинная арифметика</title>
 </head>
 <body>
-    <div class="container">
-        <div class="row col-sm-offset-2 col-sm-8">
-            <form name="calculatorForm" id="calculatorForm" class="">
-                <h3 id="formHeader">Длинная арифметика</h3>
-                <div class="row">
-                    <div class="form-group">
-                        <label for="firstNumber" class="col-sm-3 control-label">Первое число</label>
-                        <div class="col-sm-8">
-                            <input autofocus tabindex="1" class="form-control input-sm" id="firstNumber" type="text" size="64" placeholder='Знаки "+", "-" и цифры. Не более 64 символов'>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="form-group">
-                        <label for="operationSign" class="col-sm-3 control-label">Операция</label>
-                        <div class="col-sm-1" id="operationSignDiv">
-                            <select tabindex="3" class="form-control input-sm" id="operationSign">
-                                <option selected value="-">-</option>
-                                <option value="*">*</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="form-group">
-                        <label for="secondNumber" class="col-sm-3 control-label">Второе число</label>
-                        <div class="col-sm-8">
-                            <input class="form-control input-sm" tabindex="2" name="secondNumber" id="secondNumber" type="text" placeholder='Знаки "+", "-" и цифры. Не более 64 символов'>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-sm-11" id="equalSign">=</div>
-                </div>
-
-                <div class="row">
-                    <div class="form-group">
-                        <label for="result" class="col-sm-3 control-label">Результат</label>
-                        <div class="col-sm-8">
-                            <input class="form-control input-sm" id="result" type="text" readonly="readonly" placeholder="Результат" tabindex="-1">
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row">
-                        <div class="col-sm-offset-10">
-                            <button tabindex="4" type="submit" class="btn btn-default" id="OKButton">OK</button>
-                        </div>
-                </div>
-
-            </form>
-        </div>
-        <div class="row col-sm-offset-2 col-sm-8">
-            <div class="panel panel-default ">
-                <div class="panel-heading">
-                    <strong>Инструкция по использованию калькулятора</strong>
-                </div>
-                <div class="panel-body">
-                    <p>
-                        Данный калькулятор предназначен для вычисления операций вычитания и умножения больших чисел.
-                    </p>
-                    <p>
-                        Ограничения по вводу:
-                        <ul>
-                            <li>Длина числа не более 64 символов</li>
-                            <li>Число может содержать только знаки "+" и "-"(первым символом) и цифры</li>
-                        </ul>
-                    </p>
-                    <p>
-                        Для получения результата:
-                        <ol>
-                            <li>Введите первое число в поле "Первое число"</li>
-                            <li>Введите второе число в поле "Второе число"</li>
-                            <li>Выберите действие в выпадающем поле "Операция": "-" - вычитание, "*" - умножение</li>
-                            <li>Нажмите кнопку "ОК" для того, чтобы получить результат</li>
-                            <li>Результат появится в строке "Результат"</li>
-                        </ol>
-                    </p>
-                    <p>
-                        <i>Примечание. Если какое-то из полей подсвечено красным, значит, в нем есть ошибка. Проверьте его на соответствие ограничениям, указанным выше.</i>
-                    </p>
-                </div>
+   <div class="container">
+      <div class="row col-sm-offset-2 col-sm-8">
+         <form name="calculatorForm" id="calculatorForm" class="">
+            <h3 id="formHeader">Длинная арифметика</h3>
+            <div class="row">
+               <div class="form-group">
+                  <label for="firstNumber" class="col-sm-3 control-label">Первое число</label>
+                  <div class="col-sm-8">
+                     <input autofocus tabindex="1" class="form-control input-sm" id="firstNumber" type="text" size="64"
+                            placeholder='Знаки "+", "-" и цифры. Не более 64 символов'>
+                  </div>
+               </div>
             </div>
-        </div>
-    </div>
-    <script src="js/bignumberoperations.js"></script>
-    <script src="js/main.js"></script>
+
+            <div class="row">
+               <div class="form-group">
+                  <label for="operationSign" class="col-sm-3 control-label">Операция</label>
+                  <div class="col-sm-1" id="operationSignDiv">
+                     <select tabindex="3" class="form-control input-sm" id="operationSign">
+                        <option selected value="-">-</option>
+                        <option value="*">*</option>
+                     </select>
+                  </div>
+               </div>
+            </div>
+
+            <div class="row">
+               <div class="form-group">
+                  <label for="secondNumber" class="col-sm-3 control-label">Второе число</label>
+                  <div class="col-sm-8">
+                     <input class="form-control input-sm" tabindex="2" name="secondNumber" id="secondNumber" type="text"
+                            placeholder='Знаки "+", "-" и цифры. Не более 64 символов'>
+                  </div>
+               </div>
+            </div>
+
+            <div class="row">
+               <div class="col-sm-11" id="equalSign">=</div>
+            </div>
+
+            <div class="row">
+               <div class="form-group">
+                  <label for="result" class="col-sm-3 control-label">Результат</label>
+                  <div class="col-sm-8">
+                     <input class="form-control input-sm" id="result" type="text" readonly="readonly"
+                            placeholder="Результат" tabindex="-1">
+                  </div>
+               </div>
+            </div>
+
+            <div class="row">
+               <div class="col-sm-offset-10">
+                  <button tabindex="4" type="submit" class="btn btn-default" id="OKButton">OK</button>
+               </div>
+            </div>
+
+         </form>
+      </div>
+      <div class="row col-sm-offset-2 col-sm-8">
+         <div class="panel panel-default ">
+            <div class="panel-heading">
+               <strong>Инструкция по использованию калькулятора</strong>
+            </div>
+            <div class="panel-body">
+               <p>
+                  Данный калькулятор предназначен для вычисления операций вычитания и умножения больших чисел.
+               </p>
+               <p>
+                  Ограничения по вводу:
+               <ul>
+                  <li>Длина числа не более 64 символов</li>
+                  <li>Число может содержать только знаки "+" и "-"(первым символом) и цифры</li>
+               </ul>
+               </p>
+               <p>
+                  Для получения результата:
+               <ol>
+                  <li>Введите первое число в поле "Первое число"</li>
+                  <li>Введите второе число в поле "Второе число"</li>
+                  <li>Выберите действие в выпадающем поле "Операция": "-" - вычитание, "*" - умножение</li>
+                  <li>Нажмите кнопку "ОК" для того, чтобы получить результат</li>
+                  <li>Результат появится в строке "Результат"</li>
+               </ol>
+               </p>
+               <p>
+                  <i>Примечание. Если какое-то из полей подсвечено красным, значит, в нем есть ошибка. Проверьте его на
+                     соответствие ограничениям, указанным выше.</i>
+               </p>
+            </div>
+         </div>
+      </div>
+   </div>
+   <script src="js/bignumberoperations.js"></script>
+   <script src="js/main.js"></script>
 </body>
 </html>

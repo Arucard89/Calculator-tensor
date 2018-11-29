@@ -1,36 +1,36 @@
 label {
-    text-align: right;
+   text-align: right;
 }
 
 #equalSign {
-    text-align: right;
-    margin-bottom: -5px;
-    margin-top: -5px;
+   text-align: right;
+   margin-bottom: -5px;
+   margin-top: -5px;
 }
 
 .row {
-    margin-bottom: 10px;
-    margin-top: 10px;
+   margin-bottom: 10px;
+   margin-top: 10px;
 }
 
 #operationSignDiv {
-     width: 80px;
+   width: 80px;
 }
 
 #calculatorForm {
-    margin-top: 15px;
-    outline: 1px solid lightgray;
-    padding-bottom: 5px;
+   margin-top: 15px;
+   outline: 1px solid lightgray;
+   padding-bottom: 5px;
 }
 
 #formHeader {
-    padding-left: 65px;
+   padding-left: 65px;
 }
 
-.wrongInput{
-    background-color: lightcoral;
+.wrongInput {
+   background-color: lightcoral;
 }
 
 input {
-    text-align: right;
+   text-align: right;
 }
