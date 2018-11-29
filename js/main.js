@@ -1,3 +1,9 @@
+/**
+ * Выполнение тестового задания
+ * Ссылка на задание: https://github.com/Arucard89/Calculator-tensor/blob/master/Task.pdf
+ */
+
+//инициализируем основные переменные
 let bigNum = new BigNumberOperations(); //подключаем класс с арифметикой
 let btn = document.getElementById('OKButton'); //кнопка ОК""
 let firstElem = document.getElementById('firstNumber'); //первый операнд
@@ -25,10 +31,7 @@ btn.onclick = (e) => {
     goodInput = checkInput(secondElem) && goodInput;
     //если все хорошо, то выполняем выбранную операцию
     if (goodInput) {
-        //подготавливаем переменные для выполнения операций
         let operation = document.getElementById('operationSign');
-
-
         switch (operation.value){
             case '-':
                 res.value = bigNum.sub(firstVal, secondVal);
@@ -45,11 +48,10 @@ btn.onclick = (e) => {
     } else {
         alert("Неверно заполнены выделенные красным поля. Исправьте, пожалуйста, ошибку и попробуйте снова.");
     }
-
 };
 
 /**
- * проверка ввода на соответствие ТЗ
+ * проверка ввода на соответствие условиям задания
  * @param elem
  * @returns {boolean}
  */
@@ -66,7 +68,7 @@ function checkInput(elem){
 }
 
 /**
- * проверяет строку на соответствие условиям ТЗ
+ * проверяет строку на соответствие условиям задания
  * @param s
  * @returns {boolean}
  * @private
