@@ -1,5 +1,13 @@
-let btn = document.getElementById('OKButton');
+let bigNum = new BigNumberOperations(); //подключаем класс с арифметикой
+let btn = document.getElementById('OKButton'); //кнопка ОК""
+let firstElem = document.getElementById('firstNumber'); //первый операнд
+let secondElem = document.getElementById('secondNumber'); //второй операнд
+let res = document.getElementById('result'); //поле результата
 
+firstElem.onchange = secondElem.onchange = function(e) {
+    checkInput(this);
+    res.value = "";
+};
 /**
  * обработчик нажатия кнопки
  * @param e
@@ -7,8 +15,7 @@ let btn = document.getElementById('OKButton');
 btn.onclick = (e) => {
     e.preventDefault();
     //получаем значения ввода
-    let firstElem = document.getElementById('firstNumber');
-    let secondElem = document.getElementById('secondNumber');
+
     let firstVal = firstElem.value;
     let secondVal = secondElem.value;
     //флаг правильного ввода
@@ -20,16 +27,16 @@ btn.onclick = (e) => {
     if (goodInput) {
         //подготавливаем переменные для выполнения операций
         let operation = document.getElementById('operationSign');
-        let bigNum = new BigNumberOperations(firstVal, secondVal);
-        let res = document.getElementById('result');
+
+
         switch (operation.value){
             case '-':
-                res.value = bigNum.sub();
+                res.value = bigNum.sub(firstVal, secondVal);
                 break;
             case '*':
                 //асинхронно, чтобы не задерживало окно
                 setTimeout(() => {
-                    res.value = bigNum.multiply();
+                    res.value = bigNum.multiply(firstVal, secondVal);
                 }, 0);
                 break;
             default:

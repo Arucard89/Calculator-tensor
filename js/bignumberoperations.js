@@ -125,7 +125,7 @@ class BigNumberOperations {
         //превращаем в строку
         a = a.join('').replace(/^0+/,'');
         //определяем знак результата
-        if ((signa && this._compare(first, second) == 1) || (!signa && this._compare(first, second) == -1)) {
+        if (a && ((signa && this._compare(first, second) == 1) || (!signa && this._compare(first, second) == -1))) {
             a = '-' + a;
         }
         return a || '0';

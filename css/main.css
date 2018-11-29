@@ -20,6 +20,7 @@ label {
 #calculatorForm {
     margin-top: 15px;
     outline: 1px solid lightgray;
+    padding-bottom: 5px;
 }
 
 #formHeader {
@@ -28,4 +29,8 @@ label {
 
 .wrongInput{
     background-color: lightcoral;
+}
+
+input {
+    text-align: right;
 }
